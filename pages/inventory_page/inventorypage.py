@@ -1,21 +1,31 @@
 from selenium.webdriver.common.by import By
 import logging
 
-class InventoryPage:
-    LOGO_DATA = (By.CLASS_NAME, "app_logo")
-    ITEM_NAME = (By.CLASS_NAME, "inventory_item_label")
-    ITEM_DESC_PARENT = (By.CLASS_NAME, "inventory_item_description")
-    ITEM_TITLE = (By.CLASS_NAME, "inventory_item_name")
-    ITEM_PRICE = (By.CLASS_NAME, "inventory_item_price")
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+
+from pages.inventory_page.inventoryloactors import InventoryLocators
+from pages.inventory_page.inventoryproperties import InventoryProperties
+
+
+class InventoryPage(InventoryProperties):
+    # LOGO_DATA = (By.CLASS_NAME, "app_logo")
+    # ITEM_NAME = (By.CLASS_NAME, "inventory_item_label")
+    # ITEM_DESC_PARENT = (By.CLASS_NAME, "inventory_item_description")
+    # ITEM_TITLE = (By.CLASS_NAME, "inventory_item_name")
+    # ITEM_PRICE = (By.CLASS_NAME, "inventory_item_price")
 
     def __init__(self,driver):
         self.driver = driver
+        self.wait = WebDriverWait(driver, 10)
 
 
     def get_logo(self):
-        logo = self.driver.find_element(*self.LOGO_DATA)
-        logging.info(f"Logo text:  {logo.text}")
-        return logo
+        self.wait.until(expected_conditions.visibility_of_element_located(InventoryLocators.LOGO_DATA))
+        # logo = self.driver.find_element(*self.LOGO_DATA)
+        title = self.logo
+        return title.text
+
 
     def get_item_name(self):
         item_element = self.driver.find_elements(*self.ITEM_NAME)
@@ -23,12 +33,12 @@ class InventoryPage:
             logging.info(f"Item name:  {item.text}")
 
     def get_item_title_price(self):
-        parent_element = self.driver.find_elements(*self.ITEM_DESC_PARENT)
+        parent_element = self.item_desc_parent
         item_list = []
         for parent in parent_element:
             item = []
-            title = parent.find_element(*self.ITEM_TITLE)
-            price = parent.find_element(*self.ITEM_PRICE)
+            title = parent.find_element(*self.item_title)
+            price = parent.find_element(*self.item_price)
             logging.info(f"Item title:  {title.text}  price: {price.text}")
 
             item.append(title.text)
