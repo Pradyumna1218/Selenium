@@ -10,12 +10,12 @@ class LoginPage:
     def __init__(self,driver):
         self.driver = driver
 
-    def login(self,driver):
+    def login(self,username,password):
         uname_element = self.driver.find_element(*self.USERNAME_FIELD)
-        uname_element.send_keys("standard_user")
+        uname_element.send_keys(username)
 
         password_element = self.driver.find_element(*self.PASSWORD_FIELD)
-        password_element.send_keys("secret_sauce")
+        password_element.send_keys(password)
 
         login_button_element = self.driver.find_element(*self.LOGIN_BUTTON)
         login_button_element.click()

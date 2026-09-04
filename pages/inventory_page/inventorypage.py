@@ -24,11 +24,11 @@ class InventoryPage(InventoryProperties):
         self.wait.until(expected_conditions.visibility_of_element_located(InventoryLocators.LOGO_DATA))
         # logo = self.driver.find_element(*self.LOGO_DATA)
         title = self.logo
-        return title.text
+        return title
 
 
     def get_item_name(self):
-        item_element = self.driver.find_elements(*self.ITEM_NAME)
+        item_element = self.item
         for item in item_element:
             logging.info(f"Item name:  {item.text}")
 
@@ -37,8 +37,8 @@ class InventoryPage(InventoryProperties):
         item_list = []
         for parent in parent_element:
             item = []
-            title = parent.find_element(*self.item_title)
-            price = parent.find_element(*self.item_price)
+            title = parent.find_element(*InventoryLocators.ITEM_TITLE)
+            price = parent.find_element(*InventoryLocators.ITEM_PRICE)
             logging.info(f"Item title:  {title.text}  price: {price.text}")
 
             item.append(title.text)

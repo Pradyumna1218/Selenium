@@ -10,15 +10,15 @@ class InventoryProperties:
 
     @property
     def item(self):
-        return self.driver.find_element(*InventoryLocators.ITEM_NAME)
+        return self.driver.find_elements(*InventoryLocators.ITEM_NAME)
 
     @property
     def item_desc_parent(self):
-        return self.driver.find_element(*InventoryLocators.ITEM_DESC_PARENT)
+        return self.driver.find_elements(*InventoryLocators.ITEM_DESC_PARENT)
 
     @property
     def item_title(self):
-        return self.driver.find_element(*InventoryLocators.ITEM_TITLE)
+        return self.driver.find_elements(*InventoryLocators.ITEM_TITLE)
 
     @property
     def item_price(self):
